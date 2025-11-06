@@ -4,6 +4,13 @@ import { useState } from 'react'
 const ServiceCard = ({ service }) => {
   const [isHovered, setIsHovered] = useState(false)
 
+  const scrollToContact = () => {
+    const element = document.querySelector('#contact')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <motion.div
       onMouseEnter={() => setIsHovered(true)}
@@ -64,6 +71,7 @@ const ServiceCard = ({ service }) => {
 
       {/* CTA */}
       <motion.button
+        onClick={scrollToContact}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="mt-auto w-full py-2 text-sm font-medium text-cyber-red border border-cyber-red/50 rounded-lg hover:bg-cyber-red/10 transition-colors"
