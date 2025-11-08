@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'Labs', href: '#labs' },
-    { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Case Studies', href: '/case-studies' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' }
   ]
 
   const legalLinks = [
@@ -18,19 +20,10 @@ const Footer = () => {
     { name: 'PGP Key', href: '/pgp.txt' }
   ]
 
-  const scrollToSection = (href) => {
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }
-
   return (
     <footer className="relative border-t border-white/10 bg-space-black">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-5 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -74,12 +67,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
+                  <Link
+                    to={link.href}
                     className="text-sm text-gray-400 hover:text-cyber-red transition-colors"
                   >
                     {link.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -107,20 +100,48 @@ const Footer = () => {
             <h3 className="text-sm font-heading font-bold uppercase mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                ceoeddieo@gmail.com
-              </li>
-              <li className="font-mono text-dark-red">
-                +254 (798) 755-127
-              </li>
-              <li>
-                <a
-                  href="/security.txt"
-                  className="text-cyber-red hover:underline"
-                >
-                  Security Disclosure
+                <span className="text-gray-500">Email:</span><br />
+                <a href="mailto:ceoeddieo@gmail.com" className="text-cyber-red hover:underline">
+                  ceoeddieo@gmail.com
                 </a>
               </li>
+              <li className="font-mono text-dark-red">
+                <span className="text-gray-500 font-sans">Phone:</span><br />
+                <a href="tel:+254798755127" className="hover:underline">
+                  +254 (798) 755-127
+                </a>
+              </li>
+              <li>
+                <span className="text-gray-500">Address:</span><br />
+                <span className="text-gray-300">
+                  Company Address<br />
+                  Nairobi, Kenya
+                </span>
+              </li>
             </ul>
+          </div>
+
+          {/* Trust Badges */}
+          <div>
+            <h3 className="text-sm font-heading font-bold uppercase mb-4">Trust & Certifications</h3>
+            <div className="space-y-3">
+              <div className="glass-effect p-3 rounded border border-white/10 text-center">
+                <div className="text-xs text-gray-400 mb-1">OSCP</div>
+                <div className="text-xs text-gray-500 font-mono">Certified</div>
+              </div>
+              <div className="glass-effect p-3 rounded border border-white/10 text-center">
+                <div className="text-xs text-gray-400 mb-1">CISSP</div>
+                <div className="text-xs text-gray-500 font-mono">Certified</div>
+              </div>
+              <div className="glass-effect p-3 rounded border border-white/10 text-center">
+                <div className="text-xs text-gray-400 mb-1">HackerOne</div>
+                <div className="text-xs text-gray-500 font-mono">Partner</div>
+              </div>
+              <div className="glass-effect p-3 rounded border border-white/10 text-center">
+                <div className="text-xs text-gray-400 mb-1">Bugcrowd</div>
+                <div className="text-xs text-gray-500 font-mono">Partner</div>
+              </div>
+            </div>
           </div>
         </div>
 

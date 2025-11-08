@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,19 +16,24 @@ const Nav = () => {
   }, [])
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'Labs', href: '#labs' },
-    { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Case Studies', href: '/case-studies' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMobileMenuOpen(false)
+    if (location.pathname === '/') {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+        setIsMobileMenuOpen(false)
+        return
+      }
     }
+    setIsMobileMenuOpen(false)
   }
 
   return (
@@ -40,39 +47,46 @@ const Nav = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-cyber-red to-dark-red rounded-lg flex items-center justify-center">
-              <span className="text-xl font-bold">A</span>
-            </div>
-            <span className="text-xl font-heading font-bold uppercase tracking-tight">
-              Aegis
-            </span>
-          </motion.div>
+          <Link to="/">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
+              <div className="w-10 h-10 bg-gradient-to-br from-cyber-red to-dark-red rounded-lg flex items-center justify-center">
+                <span className="text-xl font-bold">A</span>
+              </div>
+              <span className="text-xl font-heading font-bold uppercase tracking-tight">
+                Aegis
+              </span>
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
+              <Link key={link.name} to={link.href}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`text-sm font-medium transition-colors ${
+                    location.pathname === link.href
+                      ? 'text-cyber-red'
+                      : 'text-gray-300 hover:text-cyber-red'
+                  }`}
+                >
+                  {link.name}
+                </motion.button>
+              </Link>
+            ))}
+            <Link to="/contact">
               <motion.button
-                key={link.name}
-                onClick={() => scrollToSection(link.href)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-sm font-medium text-gray-300 hover:text-cyber-red transition-colors"
+                className="px-6 py-2 bg-gradient-to-r from-cyber-red to-dark-red rounded-lg font-medium hover:shadow-lg hover:shadow-cyber-red/50 transition-all"
               >
-                {link.name}
+                Request Assessment
               </motion.button>
-            ))}
-            <motion.button
-              onClick={() => scrollToSection('#contact')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-gradient-to-r from-cyber-red to-dark-red rounded-lg font-medium hover:shadow-lg hover:shadow-cyber-red/50 transition-all"
-            >
-              Request Assessment
-            </motion.button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -109,20 +123,26 @@ const Nav = () => {
             >
               <div className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
-                  <button
+                  <Link
                     key={link.name}
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-left text-gray-300 hover:text-cyber-teal transition-colors py-2"
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-left transition-colors py-2 ${
+                      location.pathname === link.href
+                        ? 'text-cyber-red'
+                        : 'text-gray-300 hover:text-cyber-red'
+                    }`}
                   >
                     {link.name}
-                  </button>
+                  </Link>
                 ))}
-                <button
-                  onClick={() => scrollToSection('#contact')}
-                  className="px-6 py-2 bg-gradient-to-r from-cyber-teal to-royal-violet rounded-lg font-medium text-left"
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-6 py-2 bg-gradient-to-r from-cyber-red to-dark-red rounded-lg font-medium text-left"
                 >
                   Request Assessment
-                </button>
+                </Link>
               </div>
             </motion.div>
           )}

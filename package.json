@@ -9,13 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.11",
+    "framer-motion": "^10.16.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "framer-motion": "^10.16.16",
-    "three": "^0.158.0",
-    "@react-three/fiber": "^8.15.11",
-    "@react-three/drei": "^9.92.7",
-    "@emailjs/browser": "^3.11.0"
+    "react-router-dom": "^7.9.5",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -27,4 +28,3 @@
     "vite": "^4.5.3"
   }
 }
-

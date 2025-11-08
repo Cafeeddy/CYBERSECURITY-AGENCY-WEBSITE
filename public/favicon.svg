@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield shape -->
+  <defs>
+    <linearGradient id="shieldGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DC2626"/>
+      <stop offset="1" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield background -->
+  <path d="M32 8 L12 16 L12 32 Q12 48 32 56 Q52 48 52 32 L52 16 Z" fill="url(#shieldGradient)"/>
+  <!-- Inner shield detail -->
+  <path d="M32 16 L20 20 L20 32 Q20 42 32 48 Q44 42 44 32 L44 20 Z" fill="white" opacity="0.2"/>
+  <!-- Letter A in center -->
+  <text x="32" y="42" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" opacity="0.95">A</text>
+</svg>
+
